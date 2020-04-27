@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+
+{% load staticfiles %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>体型参数测量</title>
+    <link rel="stylesheet" href="/static/css/main.css">
+    <link rel="stylesheet" href="/static/css/tab1.css">
+    <link rel="stylesheet" href="/static/css/tab2.css">
+    <link rel="stylesheet" href="/static/css/tab3.css">
+    <link rel="stylesheet" href="/static/css/tab4.css">
+    <link rel="stylesheet" href="/static/css/tab5.css">
+    <link rel="stylesheet" href="/static/css/base.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous">
+    <script src="https://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+    <script src="/static/js/script.js"></script>
+    <script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+    <script src="/static/js/ecStat.min.js"></script>
+</head>
+<body>
+<section class="et-hero-tabs">
+    <h1>基于图像识别的人体参数测量方法研究</h1>
+    <div class="et-hero-tabs-container">
+        <a class="et-hero-tab" href="#tab-es6">图片上传</a>
+        <a class="et-hero-tab" href="#tab-flexbox" id="img_rectification">图像矫正</a>
+        <a class="et-hero-tab" href="#tab-react" id="person_seg">轮廓检测</a>
+        <a class="et-hero-tab" href="#tab-angular" id="person_key">关键点检测</a>
+        <a class="et-hero-tab" href="#tab-other" id="person_measure">测量结果</a>
+        <span class="et-hero-tab-slider"></span></div>
+</section>
+
+<main class="et-main">
+    <section class="et-slide" id="tab-es6">
+        <a href="javascript:;" class="button1">正视图上传
+            <input type="file" class="file1" accept="image/gif,image/jpeg, image/png, image/jpg"
+                   id="chooseImage0">
+        </a>
+        <a href="javascript:;" class="button2">测视图上传
+            <input type="file" class="file2" accept="image/gif,image/jpeg, image/png, image/jpg"
+                   id="chooseImage1">
+        </a>
+        {#        <button type="button" class="button3">体型测量</button>#}
+        <div class="tab1_pic_block">
+            <div class="tab1_pic_block1">
+                <img id="upload1" style="height: 100%; border: 0; visibility: hidden" alt="正视图"/>
+            </div>
+            <hr>
+            <div class="tab1_pic_block2">
+                <img id="upload2" style="height: 100%; border: 0; visibility: hidden" alt="侧视图"/>
+            </div>
+        </div>
+    </section>
+    <section class="et-slide" id="tab-flexbox">
+        <div class="tab2_pic_block">
+            <div class="tab2_pic_block_item">
+                <div class="tab2_pic">
+                    <img id="tab2_pic1" style="width: 100%; border: 0;visibility: hidden" alt="正视图左"
+                         src="/static/img/pose_seg_left_rectified_34.jpg"/>
+                    <hr>
+                    <h3>正视图左</h3>
+                </div>
+            </div>
+            <div class="tab2_pic_block_item">
+                <div class="tab2_pic">
+                    <img id="tab2_pic2" style="width: 100%; border: 0;visibility: hidden" alt="正视图右"
+                         src="/static/img/pose_seg_left_rectified_34.jpg"/>
+                    <hr>
+                    <h3>正视图右</h3>
+                </div>
+            </div>
+            <div class="tab2_pic_block_item">
+                <div class="tab2_pic">
+                    <img id="tab2_pic3" style="width: 100%; border: 0;visibility: hidden" alt="侧视图左"
+                         src="/static/img/pose_seg_left_rectified_34.jpg"/>
+                    <hr>
+                    <h3>侧视图左</h3>
+                </div>
+            </div>
+            <div class="tab2_pic_block_item">
+                <div class="tab2_pic">
+                    <img id="tab2_pic4" style="width: 100%; border: 0;visibility: hidden" alt="测视图右"
+                         src="/static/img/pose_seg_left_rectified_34.jpg"/>
+                    <hr>
+                    <h3>测视图右</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="et-slide" id="tab-react">
+        <div class="tab3_pic_block">
+            <div class="tab3_pic_block_item">
+                <div class="tab3_pic">
+                    <img id="tab3_pic1" src="/static/img/pose_seg_left_rectified_34.jpg"
+                         style="width: 100%; border: 0; visibility: hidden" alt="正视图左"/>
+                    <hr>
+                    <h3>正视图左</h3>
+                </div>
+            </div>
+            <div class="tab3_pic_block_item">
+                <div class="tab3_pic">
+                    <img id="tab3_pic2" src="/static/img/pose_seg_left_rectified_34.jpg"
+                         style="width: 100%; border: 0; visibility: hidden" alt="正视图右"/>
+                    <hr>
+                    <h3>正视图右</h3>
+                </div>
+            </div>
+            <div class="tab3_pic_block_item">
+                <div class="tab3_pic">
+                    <img id="tab3_pic3" src="/static/img/pose_seg_left_rectified_34.jpg"
+                         style="width: 100%; border: 0; visibility: hidden" alt="侧视图左"/>
+                    <hr>
+                    <h3>侧视图左</h3>
+                </div>
+            </div>
+            <div class="tab3_pic_block_item">
+                <div class="tab3_pic">
+                    <img id="tab3_pic4" src="/static/img/pose_seg_left_rectified_34.jpg"
+                         style="width: 100%; border: 0; visibility: hidden" alt="测视图右"/>
+                    <hr>
+                    <h3>测视图右</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="et-slide" id="tab-angular">
+        <div class="tab4_pic_block">
+            <div class="tab4_pic_block_item">
+                <div class="tab4_pic">
+                    <img id="tab4_pic1" src="/static/img/pose_seg_left_rectified_34.jpg"
+                         style="width: 100%; border: 0; visibility: hidden" alt="正视图"/>
+                    <hr>
+                    <h3>正视图左</h3>
+                </div>
+            </div>
+            <div class="tab4_pic_block_item">
+                <div class="tab4_pic">
+                    <img id="tab4_pic2" src="/static/img/pose_seg_left_rectified_34.jpg"
+                         style="width: 100%; border: 0; visibility: hidden" alt="正视图"/>
+                    <hr>
+                    <h3>正视图右</h3>
+                </div>
+            </div>
+            <div class="tab4_pic_block_item">
+                <div class="tab4_pic">
+                    <img id="tab4_pic3" src="/static/img/pose_seg_left_rectified_34.jpg"
+                         style="width: 100%; border: 0; visibility: hidden" alt="正视图"/>
+                    <hr>
+                    <h3>侧视图左</h3>
+                </div>
+            </div>
+            <div class="tab4_pic_block_item">
+                <div class="tab4_pic">
+                    <img id="tab4_pic4" src="/static/img/pose_seg_left_rectified_34.jpg"
+                         style="width: 100%; border: 0; visibility: hidden" alt="正视图"/>
+                    <hr>
+                    <h3>测视图右</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="et-slide" id="tab-other">
+        <div class="tab5_pic_block">
+            <div class="tab5_pic_block_item">
+                <div class="tab5_pic">
+                    <img id="tab5_pic1" src="/static/img/pose_seg_left_rectified_34.jpg"
+                         style="width: 100%; border: 0; visibility: hidden" alt="正视图"/>
+                    <hr>
+                    <h3>正视图</h3>
+                </div>
+            </div>
+            <div class="tab5_pic_block_item">
+                <div class="tab5_pic">
+                    <img id="tab5_pic2" src="/static/img/pose_seg_left_rectified_34.jpg"
+                         style="width: 100%; border: 0; visibility: hidden" alt="正视图"/>
+                    <hr>
+                    <h3>侧视图</h3>
+                </div>
+            </div>
+        </div>
+        <div class="tab5_data_block">
+            <div class="tab5_data_block_item1">
+                <table id="process-demo-1" class="tb tb-b c-100 c-t-center">
+                    <thead>
+                    <tr>
+                        <th>参数</th>
+                        <th>测量结果/cm</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>人体深度</td>
+                        <td id="d"></td>
+                    </tr>
+                    <tr>
+                        <td>身高</td>
+                        <td id="height"></td>
+                    </tr>
+                    <tr>
+                        <td>肩宽</td>
+                        <td id="shoulder"></td>
+                    </tr>
+                    <tr>
+                        <td>左上臂长</td>
+                        <td id="d_left_arm"></td>
+                    </tr>
+                    <tr>
+                        <td>左前臂长</td>
+                        <td id="d_left_forearm"></td>
+                    </tr>
+                    <tr>
+                        <td>右上臂长</td>
+                        <td id="d_right_arm"></td>
+                    </tr>
+                    <tr>
+                        <td>右前臂长</td>
+                        <td id="d_right_forearm"></td>
+                    </tr>
+                    <tr>
+                        <td>臀宽</td>
+                        <td id="waist_width"></td>
+                    </tr>
+                    <tr>
+                        <td>臀厚</td>
+                        <td id="waist_thickness"></td>
+                    </tr>
+                    <tr>
+                        <td>臀围</td>
+                        <td id="waist"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</main>
+</body>
+<script type="text/javascript" src="/static/js/uploadImg.js"></script>
+<script type="text/javascript" src="/static/js/tab_ajax.js"></script>
+</html>
+
